@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@theme inline { --color-background: var(--background); --color-foreground: var(--foreground); --font-sans: var(--font-geist-sans); --color-border: var(--border); --color-ring: var(--ring); --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground); --radius-lg: var(--radius); --radius-xl: calc(var(--radius) * 1.4); --radius-2xl: calc(var(--radius) * 1.8); }
+:root { --background: #080809; --foreground: #f5f5f4; --border: rgba(255,255,255,.1); --ring: #f4b740; --primary: #f4b740; --primary-foreground: #080809; --radius: .75rem; color-scheme: dark; }
+* { box-sizing: border-box; border-color: var(--border); }
+html { background: var(--background); font-family: var(--font-geist-sans), Arial, sans-serif; }
+body { margin: 0; min-height: 100vh; background: radial-gradient(circle at 15% -10%, rgba(244,183,64,.11), transparent 30%), radial-gradient(circle at 85% 12%, rgba(255,81,71,.08), transparent 28%), var(--background); }
+button { font: inherit; }
+.product-card { position: relative; }
+.product-card::before { content: ''; position: absolute; inset: 0 auto auto 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent); z-index: 2; }
+.feature-pin { backdrop-filter: blur(12px); box-shadow: 0 8px 24px rgba(0,0,0,.35); z-index: 4; }
+.feature-pin.selected { box-shadow: 0 0 0 4px rgba(255,255,255,.12), 0 10px 28px rgba(0,0,0,.45); }
+@media (max-width: 520px) { .feature-pin { padding: .45rem; } .feature-pin strong { display: none; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
