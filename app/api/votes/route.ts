@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     const body = await request.json() as { feature?: string; product?: string; fingerprint?: string; device?: unknown };
     if (!body.feature || !features.includes(body.feature as never) || !body.product || !products.includes(body.product as never) || !body.fingerprint || body.fingerprint.length < 32) return Response.json({ error: 'Invalid vote' }, { status: 400 });
     const db = getMySqlPool(); const ip = requestIp(request); const key = visitorKey(body.fingerprint.slice(0, 128), ip); const userAgent = (request.headers.get('user-agent') || 'unknown').slice(0, 512);
-    await db.execute<ResultSetHeader>(`INSERT INTO votes (id, feature, product, visitor_key, ip_address, user_agent, device_details, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW()) ON DUPLICATE KEY UPDATE product = VALUES(product), ip_address = VALUES(ip_address), user_agent = VALUES(user_agent), device_details = VALUES(device_details), updated_at = NOW()`, [randomUUID(), body.feature, body.product, key, ip, userAgent, JSON.stringify(body.device ?? {}).slice(0, 2048)]);
+    await db.execute<ResultSetHeader>(`INSERT IGNORE INTO votes (id, feature, product, visitor_key, ip_address, user_agent, device_details, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())`, [randomUUID(), body.feature, body.product, key, ip, userAgent, JSON.stringify(body.device ?? {}).slice(0, 2048)]);
     return Response.json(await report(key));
   } catch (error) { console.error('Unable to save vote', error); return Response.json({ error: 'Database unavailable' }, { status: 503 }); }
 }
