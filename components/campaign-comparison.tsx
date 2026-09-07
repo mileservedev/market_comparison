@@ -7,6 +7,7 @@ import {
   useState,
   type CSSProperties,
 } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import {
   ChevronDown,
@@ -98,11 +99,17 @@ export default function CampaignComparison({
 
   useEffect(() => {
     let active = true;
-    deviceFingerprint().then((fp) => {
-      if (!active) return;
-      setFingerprint(fp);
-      refresh(fp);
-    });
+    void deviceFingerprint()
+      .then((fp) => {
+        if (!active) return;
+        setFingerprint(fp);
+        void refresh(fp);
+      })
+      .catch(() => {
+        if (active) {
+          setMessage('Voting is unavailable in this browser.');
+        }
+      });
     return () => {
       active = false;
     };
@@ -110,7 +117,9 @@ export default function CampaignComparison({
 
   useEffect(() => {
     if (!fingerprint) return;
-    const timer = window.setInterval(() => refresh(fingerprint), 15000);
+    const timer = window.setInterval(() => {
+      void refresh(fingerprint);
+    }, 15000);
     return () => window.clearInterval(timer);
   }, [refresh, fingerprint]);
 
@@ -270,10 +279,9 @@ export default function CampaignComparison({
           </div>
         </div>
 
-        <div
+        <output
           className="leader-banner mb-4"
           style={leaderStyle}
-          role="status"
           aria-live="polite"
         >
           <span className="leader-crown">
@@ -294,7 +302,7 @@ export default function CampaignComparison({
               </>
             ) : (
               <>
-                <p className="leader-eyebrow">Current overall winner</p>
+                <p className="leader-eyebrow">Current community vote leader</p>
                 <p className="leader-name">{winningProduct?.name} is leading</p>
                 <p className="leader-detail">
                   {productVotes[leader]} total votes · ahead by {leadBy}
@@ -302,7 +310,7 @@ export default function CampaignComparison({
               </>
             )}
           </div>
-        </div>
+        </output>
 
         <div className="comparison-grid grid min-w-0 gap-4 lg:grid-cols-2">
           {campaign.products.map((product) => {
@@ -324,18 +332,21 @@ export default function CampaignComparison({
                   {winning && (
                     <span
                       className="card-crown"
-                      aria-label="Current overall winner"
+                      aria-label="Current community vote leader"
                     >
-                      <Crown size={18} /> Leading
+                      <Crown size={18} /> Community leader
                     </span>
                   )}
                 </div>
                 <div
                   className={`visual-map ${campaign.mapClass} relative mt-1 aspect-[3/2] w-full overflow-hidden`}
                 >
-                  <img
+                  <Image
                     src={campaign.diagram}
                     alt={`${product.name} sectioned ${campaign.subject} diagram`}
+                    fill
+                    loading="eager"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
                     className={`diagram pointer-events-none h-full w-full object-contain opacity-80 ${product.mirrored ? 'mirrored' : ''}`}
                     style={{ filter: product.diagramFilter }}
                   />
@@ -436,17 +447,36 @@ export default function CampaignComparison({
           </div>
         </section>
 
+        <aside className="legal-disclaimer mt-5 rounded-2xl border border-amber-400/15 bg-amber-400/[.045] px-4 py-4 text-xs leading-5 text-zinc-400 sm:px-5">
+          <p className="font-semibold text-zinc-200">Independent comparison</p>
+          <p className="mt-1">
+            Independent community preference poll. Not affiliated with,
+            sponsored by, or endorsed by adidas, Nike, Hyundai, or Honda.
+            Results reflect user votes—not objective product testing. All
+            trademarks belong to their respective owners.
+          </p>
+        </aside>
+
         <footer className="mt-5 flex min-w-0 flex-col justify-between gap-3 rounded-2xl border border-white/8 bg-white/[.025] px-4 py-4 text-xs leading-5 text-zinc-500 sm:flex-row sm:items-center sm:px-5">
           <p className="flex min-w-0 items-start gap-2">
             <ShieldCheck size={15} className="mt-0.5 shrink-0" />
             <span>
-              To prevent duplicate votes, this campaign stores your IP address,
-              browser/device details, and a pseudonymous device fingerprint.
+              Duplicate-vote protection uses a pseudonymous HMAC identifier; raw
+              IP addresses are not stored in the voting database. Voting records
+              are retained for a limited period.
             </span>
           </p>
-          <p aria-live="polite" className="shrink-0 text-zinc-300">
-            {message || 'Results refresh automatically.'}
-          </p>
+          <div className="flex shrink-0 flex-col gap-1 text-zinc-300 sm:items-end">
+            <Link
+              className="text-amber-300 underline decoration-amber-300/35 underline-offset-4 hover:text-amber-200"
+              href="/privacy"
+            >
+              Privacy policy
+            </Link>
+            <p aria-live="polite">
+              {message || 'Results refresh automatically.'}
+            </p>
+          </div>
         </footer>
       </section>
     </main>

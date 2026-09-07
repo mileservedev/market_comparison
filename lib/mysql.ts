@@ -4,6 +4,8 @@ import type { RowDataPacket } from 'mysql2';
 const globalForMySql = globalThis as unknown as {
   mysqlPool?: mysql.Pool;
   campaignSchemaPromise?: Promise<void>;
+  retentionCleanupPromise?: Promise<void>;
+  lastRetentionCleanupAt?: number;
 };
 
 export function getMySqlPool() {
@@ -73,6 +75,22 @@ async function migrateCampaignVoteSchema() {
         'ALTER TABLE votes ADD KEY idx_votes_campaign_feature_product (campaign, feature, product)',
       );
     }
+
+    const [rawIpColumn] = await connection.query<CountRow[]>(
+      "SELECT COUNT(*) AS total FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'votes' AND COLUMN_NAME = 'ip_address'",
+    );
+    if (Number(rawIpColumn[0]?.total)) {
+      await connection.query('ALTER TABLE votes DROP COLUMN ip_address');
+    }
+
+    const [retentionIndex] = await connection.query<CountRow[]>(
+      "SELECT COUNT(*) AS total FROM information_schema.STATISTICS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'votes' AND INDEX_NAME = 'idx_votes_created_at'",
+    );
+    if (!Number(retentionIndex[0]?.total)) {
+      await connection.query(
+        'ALTER TABLE votes ADD KEY idx_votes_created_at (created_at)',
+      );
+    }
   } finally {
     try {
       await connection.query(
@@ -92,4 +110,30 @@ export function ensureCampaignVoteSchema() {
     },
   );
   return globalForMySql.campaignSchemaPromise;
+}
+
+function voteRetentionDays() {
+  const configured = Number(process.env.VOTE_RETENTION_DAYS || 90);
+  if (!Number.isFinite(configured)) return 90;
+  return Math.min(365, Math.max(1, Math.floor(configured)));
+}
+
+export function pruneExpiredVotes() {
+  const now = Date.now();
+  if (
+    globalForMySql.lastRetentionCleanupAt &&
+    now - globalForMySql.lastRetentionCleanupAt < 6 * 60 * 60 * 1000
+  ) {
+    return Promise.resolve();
+  }
+  globalForMySql.retentionCleanupPromise ??= (async () => {
+    const cutoff = new Date(Date.now() - voteRetentionDays() * 86_400_000);
+    await getMySqlPool().execute('DELETE FROM votes WHERE created_at < ?', [
+      cutoff,
+    ]);
+    globalForMySql.lastRetentionCleanupAt = Date.now();
+  })().finally(() => {
+    globalForMySql.retentionCleanupPromise = undefined;
+  });
+  return globalForMySql.retentionCleanupPromise;
 }
