@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1000" role="img" aria-labelledby="title description">
+  <title id="title">Sectioned SUV comparison sketch</title>
+  <description id="description">An SUV outline divided into five feature sections</description>
+  <defs>
+    <linearGradient id="upper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a1602"/>
+      <stop offset="0.55" stop-color="#6d4008"/>
+      <stop offset="1" stop-color="#251303"/>
+    </linearGradient>
+    <linearGradient id="lower" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6f4309"/>
+      <stop offset="0.5" stop-color="#291503"/>
+      <stop offset="1" stop-color="#784a0a"/>
+    </linearGradient>
+    <clipPath id="body-clip">
+      <path d="M76 642 L112 560 L150 445 Q170 390 230 375 L410 338 L508 232 Q535 202 580 202 L912 202 Q958 204 992 238 L1128 370 L1320 421 Q1374 436 1400 480 L1452 566 Q1470 596 1460 642 L1438 708 Q1427 744 1382 751 L1168 770 Q1118 774 1090 735 Q1055 684 985 684 Q914 684 878 742 Q857 776 813 778 L534 778 Q489 776 468 742 Q430 684 360 684 Q288 684 252 740 Q231 773 188 766 L113 749 Q63 738 60 694 Q58 665 76 642 Z"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#body-clip)">
+    <rect x="0" y="0" width="1500" height="590" fill="url(#upper)"/>
+    <rect x="0" y="590" width="1500" height="410" fill="url(#lower)"/>
+    <path d="M510 205 L510 590 M1000 245 L1000 590 M62 590 L1465 590 M750 590 L750 785" fill="none" stroke="#f4b740" stroke-width="4"/>
+  </g>
+  <path d="M76 642 L112 560 L150 445 Q170 390 230 375 L410 338 L508 232 Q535 202 580 202 L912 202 Q958 204 992 238 L1128 370 L1320 421 Q1374 436 1400 480 L1452 566 Q1470 596 1460 642 L1438 708 Q1427 744 1382 751 L1168 770 Q1118 774 1090 735 Q1055 684 985 684 Q914 684 878 742 Q857 776 813 778 L534 778 Q489 776 468 742 Q430 684 360 684 Q288 684 252 740 Q231 773 188 766 L113 749 Q63 738 60 694 Q58 665 76 642 Z" fill="none" stroke="#f8f8f8" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M486 352 L580 240 L900 240 Q934 241 960 268 L1068 374 Z" fill="#080809" fill-opacity=".72" stroke="#f4b740" stroke-width="3"/>
+  <circle cx="360" cy="714" r="82" fill="#080809" stroke="#f8f8f8" stroke-width="5"/>
+  <circle cx="360" cy="714" r="39" fill="#261606" stroke="#f4b740" stroke-width="4"/>
+  <circle cx="985" cy="714" r="82" fill="#080809" stroke="#f8f8f8" stroke-width="5"/>
+  <circle cx="985" cy="714" r="39" fill="#261606" stroke="#f4b740" stroke-width="4"/>
+</svg>

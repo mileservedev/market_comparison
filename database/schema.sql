@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS votes (
   id CHAR(36) NOT NULL,
+  campaign VARCHAR(64) NOT NULL DEFAULT 'running-shoes',
   feature VARCHAR(64) NOT NULL,
   product VARCHAR(64) NOT NULL,
   visitor_key CHAR(64) NOT NULL,
@@ -9,6 +10,6 @@ CREATE TABLE IF NOT EXISTS votes (
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
-  UNIQUE KEY uq_votes_visitor_feature (visitor_key, feature),
-  KEY idx_votes_feature_product (feature, product)
+  UNIQUE KEY uq_votes_campaign_visitor_feature (campaign, visitor_key, feature),
+  KEY idx_votes_campaign_feature_product (campaign, feature, product)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
