@@ -4,7 +4,6 @@ export interface CampaignProduct {
   accent: string;
   accentRgb: string;
   diagramFilter?: string;
-  mirrored?: boolean;
 }
 
 export interface CampaignFeature {
@@ -50,7 +49,6 @@ export const campaigns: Record<string, Campaign> = {
         accent: '#ff5147',
         accentRgb: '255 81 71',
         diagramFilter: 'hue-rotate(-38deg) saturate(1.35)',
-        mirrored: true,
       },
     ],
     features: [
@@ -86,7 +84,6 @@ export const campaigns: Record<string, Campaign> = {
         accent: '#ff5147',
         accentRgb: '255 81 71',
         diagramFilter: 'hue-rotate(-38deg) saturate(1.35)',
-        mirrored: true,
       },
     ],
     features: [

@@ -323,7 +323,7 @@ export default function CampaignComparison({
               <article
                 key={product.id}
                 style={productStyle}
-                className={`product-card ${product.mirrored ? 'mirrored' : ''} ${winning ? 'overall-winner' : ''} min-w-0 overflow-hidden rounded-[22px] border border-white/10 bg-[#111113] shadow-2xl shadow-black/20 sm:rounded-[28px]`}
+                className={`product-card ${winning ? 'overall-winner' : ''} min-w-0 overflow-hidden rounded-[22px] border border-white/10 bg-[#111113] shadow-2xl shadow-black/20 sm:rounded-[28px]`}
               >
                 <div className="product-title relative px-4 pt-5 text-center sm:px-7 sm:pt-6">
                   <h2 className="text-xl font-semibold uppercase tracking-[.12em] sm:text-2xl">
@@ -347,7 +347,7 @@ export default function CampaignComparison({
                     fill
                     loading="eager"
                     sizes="(min-width: 1024px) 50vw, 100vw"
-                    className={`diagram pointer-events-none h-full w-full object-contain opacity-80 ${product.mirrored ? 'mirrored' : ''}`}
+                    className="diagram pointer-events-none h-full w-full object-contain opacity-80"
                     style={{ filter: product.diagramFilter }}
                   />
                   {campaign.features.map((feature) => {

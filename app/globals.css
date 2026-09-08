@@ -293,12 +293,6 @@ button {
     64.8% 76.5%
   );
 }
-.product-card.mirrored .section-hit {
-  transform: scaleX(-1);
-}
-.product-card.mirrored .section-content {
-  transform: translate(-50%, -50%) scaleX(-1);
-}
 .section-content {
   position: absolute;
   display: flex;
@@ -433,9 +427,6 @@ button {
 .section-hit:hover .hover-thumb,
 .section-hit:focus-visible .hover-thumb {
   display: block;
-}
-.diagram.mirrored {
-  transform: scaleX(-1);
 }
 @media (min-width: 640px) {
   .card-crown {

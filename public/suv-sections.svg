@@ -1,30 +1,53 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1000" role="img" aria-labelledby="title description">
   <title id="title">Sectioned SUV comparison sketch</title>
-  <description id="description">An SUV outline divided into five feature sections</description>
+  <description id="description">A tall, boxy SUV outline divided into five matching feature sections</description>
   <defs>
-    <linearGradient id="upper" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#2a1602"/>
-      <stop offset="0.55" stop-color="#6d4008"/>
-      <stop offset="1" stop-color="#251303"/>
+    <linearGradient id="rear-panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#241202"/>
+      <stop offset="1" stop-color="#704408"/>
     </linearGradient>
-    <linearGradient id="lower" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#6f4309"/>
-      <stop offset="0.5" stop-color="#291503"/>
-      <stop offset="1" stop-color="#784a0a"/>
+    <linearGradient id="cabin-panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#714509"/>
+      <stop offset="1" stop-color="#2a1603"/>
+    </linearGradient>
+    <linearGradient id="front-panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#351c03"/>
+      <stop offset="1" stop-color="#81500b"/>
+    </linearGradient>
+    <linearGradient id="lower-left" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#764708"/>
+      <stop offset="1" stop-color="#2a1603"/>
+    </linearGradient>
+    <linearGradient id="lower-right" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2a1603"/>
+      <stop offset="1" stop-color="#7b4b09"/>
     </linearGradient>
     <clipPath id="body-clip">
-      <path d="M76 642 L112 560 L150 445 Q170 390 230 375 L410 338 L508 232 Q535 202 580 202 L912 202 Q958 204 992 238 L1128 370 L1320 421 Q1374 436 1400 480 L1452 566 Q1470 596 1460 642 L1438 708 Q1427 744 1382 751 L1168 770 Q1118 774 1090 735 Q1055 684 985 684 Q914 684 878 742 Q857 776 813 778 L534 778 Q489 776 468 742 Q430 684 360 684 Q288 684 252 740 Q231 773 188 766 L113 749 Q63 738 60 694 Q58 665 76 642 Z"/>
+      <path d="M60 590 L105 475 Q119 425 175 405 L330 365 L475 235 Q505 205 555 205 L925 205 Q970 207 1005 245 L1110 365 L1325 420 Q1390 438 1420 493 L1460 590 L1440 700 Q1432 744 1385 758 L1150 785 Q1110 789 1086 748 Q1044 680 970 680 Q896 680 858 750 Q838 785 795 785 L548 785 Q508 785 488 748 Q448 680 375 680 Q301 680 260 748 Q235 790 190 780 L105 760 Q62 749 56 704 Q50 644 60 590 Z"/>
     </clipPath>
   </defs>
+
   <g clip-path="url(#body-clip)">
-    <rect x="0" y="0" width="1500" height="590" fill="url(#upper)"/>
-    <rect x="0" y="590" width="1500" height="410" fill="url(#lower)"/>
-    <path d="M510 205 L510 590 M1000 245 L1000 590 M62 590 L1465 590 M750 590 L750 785" fill="none" stroke="#f4b740" stroke-width="4"/>
+    <path d="M75 590 L120 500 L150 420 L240 380 L405 340 L510 220 L510 590 Z" fill="url(#rear-panel)"/>
+    <path d="M510 220 L585 200 L915 200 L1005 370 L1005 590 L510 590 Z" fill="url(#cabin-panel)"/>
+    <path d="M1005 370 L1125 370 L1320 420 L1410 480 L1455 590 L1005 590 Z" fill="url(#front-panel)"/>
+    <path d="M60 590 L750 590 L750 790 L525 790 L360 760 L120 750 L55 690 Z" fill="url(#lower-left)"/>
+    <path d="M750 590 L1465 590 L1440 710 L1365 755 L1125 775 L945 790 L750 790 Z" fill="url(#lower-right)"/>
+    <path d="M510 205 L510 590 M1005 245 L1005 590 M58 590 L1462 590 M750 590 L750 790" fill="none" stroke="#f4b740" stroke-width="4"/>
   </g>
-  <path d="M76 642 L112 560 L150 445 Q170 390 230 375 L410 338 L508 232 Q535 202 580 202 L912 202 Q958 204 992 238 L1128 370 L1320 421 Q1374 436 1400 480 L1452 566 Q1470 596 1460 642 L1438 708 Q1427 744 1382 751 L1168 770 Q1118 774 1090 735 Q1055 684 985 684 Q914 684 878 742 Q857 776 813 778 L534 778 Q489 776 468 742 Q430 684 360 684 Q288 684 252 740 Q231 773 188 766 L113 749 Q63 738 60 694 Q58 665 76 642 Z" fill="none" stroke="#f8f8f8" stroke-width="5" stroke-linejoin="round"/>
-  <path d="M486 352 L580 240 L900 240 Q934 241 960 268 L1068 374 Z" fill="#080809" fill-opacity=".72" stroke="#f4b740" stroke-width="3"/>
-  <circle cx="360" cy="714" r="82" fill="#080809" stroke="#f8f8f8" stroke-width="5"/>
-  <circle cx="360" cy="714" r="39" fill="#261606" stroke="#f4b740" stroke-width="4"/>
-  <circle cx="985" cy="714" r="82" fill="#080809" stroke="#f8f8f8" stroke-width="5"/>
-  <circle cx="985" cy="714" r="39" fill="#261606" stroke="#f4b740" stroke-width="4"/>
+
+  <path d="M60 590 L105 475 Q119 425 175 405 L330 365 L475 235 Q505 205 555 205 L925 205 Q970 207 1005 245 L1110 365 L1325 420 Q1390 438 1420 493 L1460 590 L1440 700 Q1432 744 1385 758 L1150 785 Q1110 789 1086 748 Q1044 680 970 680 Q896 680 858 750 Q838 785 795 785 L548 785 Q508 785 488 748 Q448 680 375 680 Q301 680 260 748 Q235 790 190 780 L105 760 Q62 749 56 704 Q50 644 60 590 Z" fill="none" stroke="#f8f8f8" stroke-width="6" stroke-linejoin="round"/>
+
+  <path d="M455 380 L570 245 L905 245 Q942 246 970 278 L1055 380 Z" fill="#080809" fill-opacity=".82" stroke="#f4b740" stroke-width="4"/>
+  <path d="M714 245 L714 380 M930 252 L900 380" fill="none" stroke="#f4b740" stroke-width="4"/>
+  <path d="M520 183 L926 183 M548 183 L565 205 M900 183 L914 205" fill="none" stroke="#f8f8f8" stroke-width="6" stroke-linecap="round"/>
+  <path d="M1094 407 L1318 459 M1337 477 L1402 500 L1422 553 L1353 548 Z" fill="none" stroke="#f4b740" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M166 447 L119 475 L98 541 L165 531 Z" fill="none" stroke="#f4b740" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M548 485 L688 485 M815 485 L955 485" fill="none" stroke="#f4b740" stroke-width="4" stroke-linecap="round"/>
+
+  <circle cx="375" cy="724" r="88" fill="#080809" stroke="#f8f8f8" stroke-width="6"/>
+  <circle cx="375" cy="724" r="43" fill="#281704" stroke="#f4b740" stroke-width="5"/>
+  <circle cx="970" cy="724" r="88" fill="#080809" stroke="#f8f8f8" stroke-width="6"/>
+  <circle cx="970" cy="724" r="43" fill="#281704" stroke="#f4b740" stroke-width="5"/>
+  <path d="M64 716 L124 732 M1383 735 L1434 716" fill="none" stroke="#f4b740" stroke-width="5" stroke-linecap="round"/>
 </svg>
